@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  mcommerce.catalog.api.db:
+    image: mongo
+
+  mcommerce.catalog.api:
+    image: ${DOCKER_REGISTRY-}mcommercecatalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/MCommerce.Catalog.API/Dockerfile
+
+volumes:
+  mongo_data:

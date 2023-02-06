@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  mcommerce.catalog.api.db:
+    container_name: mcommerce.catalog.api.db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mcommerce.catalog.api:
+    container_name: mcommerce.catalog.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DBSettings__ConnectionString=mongodb://mcommerce.catalog.api.db:27017"
+    depends_on:
+      - mcommerce.catalog.api.db
+    ports:
+      - "8000:80"
