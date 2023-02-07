@@ -10,5 +10,18 @@ services:
       context: .
       dockerfile: Services/Catalog/MCommerce.Catalog.API/Dockerfile
 
+  mcommerce.basket.api:
+    image: ${DOCKER_REGISTRY-}mcommercebasketapi
+    build:
+      context: .
+      dockerfile: Services/Basket/MCommerce.Basket.API/Dockerfile
+
+  mcommerce.basket.api.db:
+    image: redis:alpine
+
+  portainer:
+    image: portainer/portainer-ce
+
 volumes:
   mongo_data:
+  portainer_data:

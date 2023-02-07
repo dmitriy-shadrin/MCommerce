@@ -18,3 +18,29 @@ services:
       - mcommerce.catalog.api.db
     ports:
       - "8000:80"
+
+  mcommerce.basket.api.db:
+    container_name: mcommerce.basket.api.db
+    restart: always
+    ports:
+      - "6379:6379"
+
+  mcommerce.basket.api:
+    container_name: mcommerce.basket.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings__ConnectionString=mcommerce.basket.api.db:6379"
+    depends_on:
+      - mcommerce.basket.api.db
+    ports:
+      - "8001:80"
+
+  portainer:
+    container_name: portainer
+    restart: always
+    ports:
+      - "8090:8000"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
