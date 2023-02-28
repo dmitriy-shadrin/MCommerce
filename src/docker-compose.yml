@@ -19,9 +19,13 @@ services:
   mcommerce.basket.api.db:
     image: redis:alpine
 
+  mcommerce.discount.api.db:
+    image: postgres
+
   portainer:
     image: portainer/portainer-ce
 
 volumes:
   mongo_data:
   portainer_data:
+  postgres_data:

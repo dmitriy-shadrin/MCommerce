@@ -35,6 +35,18 @@ services:
     ports:
       - "8001:80"
 
+  mcommerce.discount.api.db:
+    container_name: mcommerce.discount.api.db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=mcommerce.discount.api.db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
   portainer:
     container_name: portainer
     restart: always
